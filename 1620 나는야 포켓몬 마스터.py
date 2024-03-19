@@ -1,12 +1,22 @@
-pokemon_count, quiz_count = map(int, input().split())
-pokemon = set()
+# 빠른 채점을 위해 PyPy3로 제출
 
-for _ in range(pokemon_count):
-    pokemon.add(input())
+import sys
+
+input = sys.stdin.readline
+
+pokemon_count, quiz_count = map(int, input().split())
+index_to_name = []
+name_to_index = {}
+
+for i in range(pokemon_count):
+    name = input().rstrip()
+    index_to_name.append(name)
+    name_to_index[name] = i + 1
 
 for _ in range(quiz_count):
-    quiz = input()
-    if quiz in pokemon:
-        print(pokemon.index(quiz) + 1)
+    quiz = input().rstrip()
+    if quiz.isdigit():
+        key = int(quiz)
+        print(index_to_name[key-1])
     else:
-        print(pokemon[int(quiz)-1])
+        print(name_to_index[quiz])
